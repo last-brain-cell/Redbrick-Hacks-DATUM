@@ -2,7 +2,7 @@
 
 Theme: Sustainable and Assistive Tech for a better India
 
-Solution: DATUM - Decentralized Assistive Tech 
+Solution: DATUM - Decentralized Assistive - Tech Unifying Mechanism
 
 # Team - 
 1. Naad Dantale
