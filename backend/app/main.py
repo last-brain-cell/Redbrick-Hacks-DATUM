@@ -4,7 +4,7 @@ import random
 
 app = FastAPI()
 
-origins = ["http://localhost", "http://localhost:8080", "http://localhost:8000"]  # Add your frontend URLs here
+origins = ["http://localhost", "http://localhost:8080", "http://localhost:8000", "http://localhost:63342"]  # Recorded frontend URLs
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -42,7 +42,8 @@ def update_patient_params(patient_updates: dict):
 def get_patient_location():
     latitude = random.uniform(-90, 90)
     longitude = random.uniform(-180, 180)
-    return {"latitude": latitude, "longitude": longitude}
+    iframe_src = f"https://www.openstreetmap.org/export/embed.html?bbox={longitude - 1}%2C{latitude - 1}%2C{longitude + 1}%2C{latitude + 1}&amp;layer=mapnik&amp;marker={latitude}%2C{longitude}"
+    return {"iframe_src": iframe_src}
 
 @app.get("/patient/vitals")
 def get_patient_vitals():

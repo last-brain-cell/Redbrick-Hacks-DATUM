@@ -73,8 +73,10 @@ fetchButton2.addEventListener('click', async () => {
         const locationDiv = document.createElement('div');
         locationDiv.className = 'location';
         locationDiv.innerHTML = `
-            <p>Latitude: ${locationData.latitude}</p>
-            <p>Longitude: ${locationData.longitude}</p>
+            // <iframe width="300" height="450" src={locationData}></iframe>
+            <iframe width="300" height="450" src={locationData.iframe_src} style="border: 1px solid black"></iframe><br/>
+            <small><a href="https://www.openstreetmap.org/?mlat=-43&amp;mlon=2#map=1/-43/2">View Larger Map</a></small>
+            <p>locationData</p>
         `;
         outputDiv2.appendChild(locationDiv);
     } catch (error) {
