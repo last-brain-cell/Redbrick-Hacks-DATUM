@@ -6,6 +6,8 @@ import csv
 
 app = FastAPI()
 
+global latitude, longitude
+
 origins = ["http://localhost", "http://localhost:8080", "http://localhost:8000", "http://localhost:63342"]  # Recorded frontend URLs
 app.add_middleware(
     CORSMiddleware,
