@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, sans-serif;
+}
+.container {
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    max-width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center
+}
+h1 {
+    margin-bottom: 20px;
+    text-align: center
+}
+.output {
+    margin-top: 20px;
+    border-top: 1px solid #ccc;
+    padding-top: 20px;
+}
+.patient, .patientVitals, .alerts, .reminders {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
