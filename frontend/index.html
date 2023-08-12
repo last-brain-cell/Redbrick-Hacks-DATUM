@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Profile Fetcher</title>
+    <link rel="stylesheet" type="text/css" href="style.css.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            max-width: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-align: center
+        }
+        .output {
+            margin-top: 20px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+        .patient, .patientVitals {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Patient Data Fetcher</h1>
+    <button id="fetchButton">Fetch Patient Profile</button>
+    <button id="fetchButton1">Fetch Patient Vitals</button>
+    <button id="fetchButton2">Fetch Patient Location</button>
+    <div class="output"></div>
+    <div class="output1"></div>
+    <div class="output2"></div>
+    <button id="dismissButton">Dismiss Profile</button>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
