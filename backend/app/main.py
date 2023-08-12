@@ -4,7 +4,7 @@ import random
 
 app = FastAPI()
 
-origins = ["http://localhost", "http://localhost:8080", "http://localhost:63342"]  # Add your frontend URLs here
+origins = ["http://localhost", "http://localhost:8080", "http://localhost:8000"]  # Add your frontend URLs here
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
