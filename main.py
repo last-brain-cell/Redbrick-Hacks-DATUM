@@ -1,51 +1,40 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 app = FastAPI()
 
-patients = {
-    1: {"name": "Alice", "age": 65},
-    2: {"name": "Bob", "age": 70},
-    3: {"name": "Eve", "age": 75}
-}
+# In-memory database for patient profiles
+patients_db = {}
 
-# Sample route with path parameter
-@app.get("/patient/{patient_id}")
-def get_patient(patient_id: int):
-    if patient_id in patients:
-        return patients[patient_id]
-    else:
-        return {"error": "Patient not found"}
-
-# Sample route with query parameter
-@app.get("/patients/")
-def get_patients(age: int = None):
-    if age is None:
-        return patients
-    else:
-        filtered_patients = {pid: patient for pid, patient in patients.items() if patient["age"] == age}
-        return filtered_patients
-
-# Sample route to create a new patient
+# Route to create a new patient profile
 @app.post("/patient/")
-def create_patient(patient_data: dict):
-    patient_id = max(patients.keys()) + 1
-    patients[patient_id] = patient_data
-    return {"message": "Patient created", "patient_id": patient_id}
+def create_patient_profile(patient_name: str, age: int, diagnosis: str):
+    patient_id = len(patients_db) + 1
+    new_patient = {
+        "patient_name": patient_name,
+        "age": age,
+        "diagnosis": diagnosis
+    }
+    patients_db[patient_id] = new_patient
+    return {"message": "Patient profile created", "patient_id": patient_id}
 
-# Sample route to update patient data
+# Route to get patient profile by ID
+@app.get("/patient/{patient_id}")
+def get_patient_profile(patient_id: int):
+    if patient_id in patients_db:
+        return patients_db[patient_id]
+    else:
+        raise HTTPException(status_code=404, detail="Patient not found")
+
+# Route to update patient parameters
 @app.put("/patient/{patient_id}")
-def update_patient(patient_id: int, updated_data: dict):
-    if patient_id in patients:
-        patients[patient_id].update(updated_data)
-        return {"message": "Patient data updated"}
+def update_patient_params(patient_id: int, patient_updates: dict):
+    if patient_id in patients_db:
+        patients_db[patient_id].update(patient_updates)
+        return {"message": "Patient parameters updated"}
     else:
-        return {"error": "Patient not found"}
+        raise HTTPException(status_code=404, detail="Patient not found")
 
-# Sample route to delete a patient
-@app.delete("/patient/{patient_id}")
-def delete_patient(patient_id: int):
-    if patient_id in patients:
-        del patients[patient_id]
-        return {"message": "Patient deleted"}
-    else:
-        return {"error": "Patient not found"}
+# Run the server with Uvicorn
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000)
