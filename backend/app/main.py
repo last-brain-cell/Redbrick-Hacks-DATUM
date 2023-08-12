@@ -5,6 +5,9 @@ import random
 import csv
 
 app = FastAPI()
+latitude = 0.0
+longitude = 0.0
+
 
 
 origins = ["http://localhost", "http://localhost:8080", "http://localhost:8000", "http://localhost:63342"]  # Recorded frontend URLs
