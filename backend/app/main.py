@@ -59,6 +59,8 @@ def update_patient_params(patient_updates: dict):
     profile_db.update(patient_updates)
     return {"message": "Patient parameters updated"}
 
+
+## Imperative that location string be passed correctly in quotes as a float.
 @app.post("/patient/location")
 def set_patient_location(location_data: LocationData):
     latitude = location_data.latitude
