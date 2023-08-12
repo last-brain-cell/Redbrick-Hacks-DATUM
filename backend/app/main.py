@@ -1,6 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 import random
+import csv
 
 app = FastAPI()
 
@@ -26,6 +28,17 @@ patient_data = []
 patient_alerts = []
 patient_reminders = []
 patient_sleep_data = []
+
+CSV_FILE = "heart_rate_data.csv"
+CSV_FILE1 = "blood_oxygen_data.csv"
+
+class HeartRateData(BaseModel):
+    timestamp: str
+    heart_rate: int
+
+class BloodOxygenData(BaseModel):
+    timestamp: str
+    blood_oxygen: int
 
 # Route to get patient profile
 @app.get("/patient/profile")
@@ -97,6 +110,27 @@ def get_patient_sleep_data():
 @app.put("/patient/sleep_data/put")
 def put_patient_sleep_data(date, duration):
     patient_sleep_data.append({date: duration})
+
+@app.post("/write_heart_rate")
+async def write_heart_rate(data: HeartRateData):
+    try:
+        with open(CSV_FILE, 'a', newline='') as csvfile:
+            csv_writer = csv.writer(csvfile)
+            csv_writer.writerow([data.timestamp, data.heart_rate])
+
+        return {'message': 'Heart rate data written successfully.'}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+@app.post("/read_heart_rate")
+async def write_blood_oxygen(data: BloodOxygenData):
+    try:
+        with open(CSV_FILE, 'a', newline='') as csvfile:
+            csv_writer = csv.writer(csvfile)
+            csv_writer.writerow([data.timestamp, data.blood_oxygen])
+
+        return {'message': 'Blood oxygen data written successfully.'}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 if __name__ == "__main__":

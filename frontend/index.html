@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Data Fetcher</title>
-
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -15,12 +16,14 @@
         <button id="fetchRemindersButton">Fetch Patient Reminders</button>
         <button id="fetchButton2">Fetch Patient Location</button>
         <button id="fetch-sleep-data">Fetch Sleep Data</button>
+        <button id="heart-data-button">Fetch Heart Data</button>
         <div class="output"></div>
         <div class="output1"></div>
         <div class="alerts"></div>
         <div class="reminders"></div>
         <div class="output2"></div> <!--map-->
         <div class="sleep-data"></div>
+        <div id="chart" class="chart"></div>
         <button id="dismissButton">Dismiss</button>
 
     </div>

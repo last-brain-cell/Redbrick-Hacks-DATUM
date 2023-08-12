@@ -4,6 +4,7 @@ const fetchButton2 = document.getElementById('fetchButton2');
 const fetchAlertsButton = document.getElementById('fetchAlertsButton');
 const fetchRemindersButton = document.getElementById('fetchRemindersButton');
 const fetchSleepData = document.getElementById('fetch-sleep-data');
+const fetchHeartData = document.getElementById('heart-data-button');
 const outputDiv = document.querySelector('.output');
 const outputDiv1 = document.querySelector('.output1');
 const outputDiv2 = document.querySelector('.output2');
@@ -11,6 +12,7 @@ const dismissButton = document.getElementById('dismissButton');
 const alertsDiv = document.querySelector('.alerts');
 const remindersDiv = document.querySelector('.reminders');
 const sleepDataDiv = document.querySelector('.sleep-data');
+const HeartDataDiv = document.querySelector('.chart');
 
 
 // Fetch patient profile
@@ -146,6 +148,80 @@ fetchSleepData.addEventListener('click', async () => {
     }
 });
 
+fetchHeartData.addEventListener('click', async () => {
+    HeartDataDiv.innerHTML = '';
+
+    try {
+        const dataUrl = 'heart_rate_data.csv';
+
+        // Fetch and parse CSV data
+            Papa.parse(dataUrl, {
+              download: true,
+              header: true,
+              skipEmptyLines: true,
+              complete: function(results) {
+                const timestamp = results.data.map(row => parseFloat(row.timestamp));
+                const heart_rate = results.data.map(row => parseFloat(row.heart_rate));
+
+                // Calculate average heart rate
+                const averageHeartRate = heart_rate.reduce((sum, rate) => sum + rate, 0) / heart_rate.length;
+
+                // Find peaks using a simple threshold
+                const peaks = [];
+                for (let i = 1; i < heart_rate.length - 1; i++) {
+                  if (heart_rate[i] > heart_rate[i - 1] && heart_rate[i] > heart_rate[i + 1] && heart_rate[i] > 0.5) {
+                    peaks.push(i);
+                  }
+                }
+
+                const trace = {
+                  x: timestamp,
+                  y: heart_rate,
+                  mode: 'lines',
+                  line: { color: 'red', width: 1.5 },
+                  name: 'Heart Rate'
+                };
+
+                const averageLine = {
+                  type: 'line',
+                  x0: timestamp[0],
+                  x1: timestamp[timestamp.length - 1],
+                  y0: averageHeartRate,
+                  y1: averageHeartRate,
+                  line: { color: 'blue', dash: 'dash' },
+                  name: 'Average HR'
+                };
+
+                const peakMarkers = {
+                  x: peaks.map(index => timestamp[index]),
+                  y: peaks.map(index => heart_rate[index]),
+                  mode: 'markers',
+                  marker: { color: 'green', size: 5 },
+                  name: 'R-waves'
+                };
+
+                const layout = {
+                  title: 'Heart Rate Monitor',
+                  xaxis: { title: 'Time' },
+                  yaxis: { title: 'Heart Rate' },
+                  grid: { dash: 'dot', alpha: 0.7 },
+                  shapes: [averageLine],
+                };
+
+                const chartItem = document.createElement('div');
+                chartItem.className = 'chartEntry';
+                chartItem.innerHTML = `
+                    <p>${Plotly.newPlot('chart', [trace, peakMarkers], layout)}</p>
+                `;
+                HeartDataDiv.appendChild(chartItem);
+            }
+        });
+
+    } catch (error) {
+        console.error('Error fetching sleep data:', error);
+    }
+});
+
 
 dismissButton.addEventListener('click', () => {
     outputDiv.innerHTML = '';
@@ -154,4 +230,5 @@ dismissButton.addEventListener('click', () => {
     alertsDiv.innerHTML = '';
     remindersDiv.innerHTML = '';
     sleepDataDiv.innerHTML = '';
+    HeartDataDiv.innerHTML = '';
 });
