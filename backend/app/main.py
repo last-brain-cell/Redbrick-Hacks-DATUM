@@ -57,9 +57,12 @@ def update_patient_params(patient_updates: dict):
     return {"message": "Patient parameters updated"}
 
 @app.post("/patient/location")
-def set_patient_location(latitude: int, longitude: int):
+def set_patient_location(location_data: LocationData):
+    latitude = location_data.latitude
+    longitude = location_data.longitude
     iframe_src = f"https://www.openstreetmap.org/?mlat={latitude}&mlon={longitude}#map=15/{latitude}/{longitude}"
     return {"iframe_src": iframe_src}
+
 
 
 @app.get("/patient/location")
