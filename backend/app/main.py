@@ -4,8 +4,7 @@ import random
 
 app = FastAPI()
 
-# Set up CORS
-origins = ["http://localhost", "http://localhost:8080", "http://localhost:63343"]  # Add your frontend URLs here
+origins = ["http://localhost", "http://localhost:8080", "http://localhost:63342"]  # Add your frontend URLs here
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -14,7 +13,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# In-memory database for patient profiles
 profile_db = {
     'patient_name': "John Doe",
     'age': 60,
@@ -61,18 +59,7 @@ def get_patient_ehr():
         "must contain": "EHR DATA"
     }
 
-# @app.post("/patient/vitals/")
-# def post_patients_vitals():
-#     heart_rate = random.randint(70, 120)
-#     blood_pressure = [random.randint(70, 95), random.randint(100, 140)]
-#     spo2 = random.randint(80, 98)
-#     return {
-#         "heart_rate": heart_rate,
-#         "blood_pressure": blood_pressure,
-#         "spo2": spo2
-#             }
 
-# Run the server with Uvicorn
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="127.0.0.1", port=8000)
