@@ -42,8 +42,8 @@ class BloodOxygenData(BaseModel):
     blood_oxygen: int
 
 class LocationData(BaseModel):
-    latitude: int
-    longitude: int
+    latitude: float
+    longitude: float
 
 # Route to get patient profile
 @app.get("/patient/profile")
