@@ -1,8 +1,8 @@
 # Redbrick-Hacks-DATUM
 
-# Theme: Sustainable and Assistive Tech for a better India
+Theme: Sustainable and Assistive Tech for a better India
 
-# Solution: DATUM - Decentralized Assistive Tech 
+Solution: DATUM - Decentralized Assistive Tech 
 
 # Team - 
 1. Naad Dantale
