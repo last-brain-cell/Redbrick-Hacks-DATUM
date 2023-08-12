@@ -14,11 +14,21 @@ const remindersDiv = document.querySelector('.reminders');
 const sleepDataDiv = document.querySelector('.sleep-data');
 const HeartDataDiv = document.querySelector('.chart');
 
+function dismissInfo(){
+    outputDiv.innerHTML = '';
+    outputDiv1.innerHTML = '';
+    outputDiv2.innerHTML = '';
+    alertsDiv.innerHTML = '';
+    remindersDiv.innerHTML = '';
+    sleepDataDiv.innerHTML = '';
+    HeartDataDiv.innerHTML = '';
+}
+
 
 // Fetch patient profile
 fetchButton.addEventListener('click', async () => {
     outputDiv.innerHTML = '';
-
+    dismissInfo();
     try {
         const responseProfile = await fetch('http://127.0.0.1:8000/patient/profile');
         const patientProfile = await responseProfile.json();
@@ -45,7 +55,7 @@ fetchButton.addEventListener('click', async () => {
 
 fetchButton1.addEventListener('click', async () => {
     outputDiv1.innerHTML = '';
-
+    dismissInfo();
     try {
         const responseVitals = await fetch('http://127.0.0.1:8000/patient/vitals');
         const patientVitals = await responseVitals.json(); // Add await here
@@ -67,7 +77,7 @@ fetchButton1.addEventListener('click', async () => {
 // Fetch patient location
 fetchButton2.addEventListener('click', async () => {
     outputDiv2.innerHTML = '';
-
+    dismissInfo();
     try {
         const response = await fetch('http://127.0.0.1:8000/patient/location');
         const locationData = await response.json();
@@ -76,9 +86,8 @@ fetchButton2.addEventListener('click', async () => {
         locationDiv.className = 'location';
         locationDiv.innerHTML = `
             // <iframe width="300" height="450" src={locationData}></iframe>
-            <iframe width="300" height="450" src={locationData.iframe_src} style="border: 1px solid black"></iframe><br/>
-            <small><a href="https://www.openstreetmap.org/?mlat=-43&amp;mlon=2#map=1/-43/2">View Larger Map</a></small>
-            <p>locationData</p>
+            <iframe width="300" height="450" src={locationData.iframe_src} style="border: 1px solid black"></iframe><br>
+            // <small><a href="https://www.openstreetmap.org/?mlat=-43&amp;mlon=2#map=1/-43/2">View Larger Map</a></small>
         `;
         outputDiv2.appendChild(locationDiv);
     } catch (error) {
@@ -89,7 +98,7 @@ fetchButton2.addEventListener('click', async () => {
 // Fetch patient alerts
 fetchAlertsButton.addEventListener('click', async () => {
     alertsDiv.innerHTML = '';
-
+    dismissInfo();
     try {
         const response = await fetch('http://127.0.0.1:8000/patient/alerts');
         const alertsData = await response.json();
@@ -110,7 +119,7 @@ fetchAlertsButton.addEventListener('click', async () => {
 // Fetch patient reminders
 fetchRemindersButton.addEventListener('click', async () => {
     remindersDiv.innerHTML = '';
-
+    dismissInfo();
     try {
         const response = await fetch('http://127.0.0.1:8000/patient/reminders');
         const remindersData = await response.json();
@@ -130,7 +139,7 @@ fetchRemindersButton.addEventListener('click', async () => {
 
 fetchSleepData.addEventListener('click', async () => {
     sleepDataDiv.innerHTML = '';
-
+    dismissInfo();
     try {
         const response = await fetch('http://127.0.0.1:8000/patient/sleep_data');
         const sleepData = await response.json();
@@ -150,7 +159,7 @@ fetchSleepData.addEventListener('click', async () => {
 
 fetchHeartData.addEventListener('click', async () => {
     HeartDataDiv.innerHTML = '';
-
+    dismissInfo();
     try {
         const dataUrl = 'heart_rate_data.csv';
 
@@ -223,12 +232,4 @@ fetchHeartData.addEventListener('click', async () => {
 });
 
 
-dismissButton.addEventListener('click', () => {
-    outputDiv.innerHTML = '';
-    outputDiv1.innerHTML = '';
-    outputDiv2.innerHTML = '';
-    alertsDiv.innerHTML = '';
-    remindersDiv.innerHTML = '';
-    sleepDataDiv.innerHTML = '';
-    HeartDataDiv.innerHTML = '';
-});
+dismissButton.addEventListener("click", dismissInfo);
