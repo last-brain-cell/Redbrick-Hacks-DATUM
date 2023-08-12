@@ -8,7 +8,15 @@ profile_db = {
     'Age': 60,
     'diagnosis': "Alzheimer’s disease",
 }
-
+# Set up CORS
+origins = ["http://localhost", "http://localhost:8080", "http://localhost:63343"]  # Add your frontend URLs here
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Route to get patient profile by ID
 @app.get("/patient")
 def get_patient_profile():
