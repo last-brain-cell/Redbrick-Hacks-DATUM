@@ -55,12 +55,12 @@ def update_patient_params(patient_updates: dict):
 def get_patient_location():
     latitude = random.uniform(-90, 90)
     longitude = random.uniform(-180, 180)
-    iframe_src = f"https://www.openstreetmap.org/?mlat={latitude}&mlon={longitude}#map=19/{latitude}/{longitude}"
+    iframe_src = f"https://www.openstreetmap.org/?mlat={latitude}&mlon={longitude}#map=15/{latitude}/{longitude}"
     return {"iframe_src": iframe_src}
 
 @app.post("/patient/location")
 def set_patient_location(latitude: float, longitude: float):
-    iframe_src = f"https://www.openstreetmap.org/?mlat={latitude}&mlon={longitude}#map=19/{latitude}/{longitude}"
+    iframe_src = f"https://www.openstreetmap.org/?mlat={latitude}&mlon={longitude}#map=15/{latitude}/{longitude}"
     return {"iframe_src": iframe_src}
 
 @app.get("/patient/vitals")
