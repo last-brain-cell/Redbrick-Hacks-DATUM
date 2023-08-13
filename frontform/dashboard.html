@@ -20,13 +20,31 @@
             <h2 class="menutitletext">Settings</h2>
         </div>
         <div id="Frame4">
-            <h2 id="Devicemanagement">Device Management</h2>
+            <h2 id="Devicemanagement"><button onclick="navigateToDeviceManagement()">Device Management</button></h2>
+            <script>
+                function navigateToDeviceManagement() {
+                    // Redirect to the devicemanagement.html page
+                    window.location.href = "devicemanagement.html";
+                }
+            </script>
         </div>
         <div id="frame5">
-            <h2 id="medicinereminders">Medicine Reminders</h2>
+            <h2 id="medicinereminders"><button onclick="navigateToMedicineReminders()">Medicine Reminders</button></h2>
+            <script>
+                function navigateToMedicineReminders() {
+                    // Redirect to the devicemanagement.html page
+                    window.location.href = "medicinereminder.html";
+                }
+            </script>
         </div>
         <div id="frame7">
-            <h2 id="datamanagement">Data Management</h2>
+            <h2 id="datamanagement"><button onclick="navigateToDataManagement()">Data Management</button></h2>
+            <script>
+                function navigateToDataManagement() {
+                    window.location.href = "datamanagement.html";
+                }
+            </script>
+        
         </div>
     </div>
     <div id="devicebox">
