@@ -4,40 +4,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>DAtime</title>
-    <link rel="stylesheet" href="devicemanagement.css">
+    <link rel="stylesheet" href="dashboard.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat">
-    <script src=""script.js"></script>
+    <script src="script.js"></script>
   </head>
   <body background=#EDF2F4>
     <div class="Header">
         <h1 class="title">DATUM</h1>
         <div class="line1"></div>
-        <h2 class="heading">Medicine Reminder</h2>
+        <h2 class="heading">Dashboard</h2>
     </div>
     <div class="mainmenu">
         <div class="menutitle">
             <h2 class="menutitletext">Settings</h2>
         </div>
         <div id="Frame4">
-            <h2 id="Devicemanagement">Device Management</h2>
+            <h2 id="Devicemanagement"><button onclick="navigateToDeviceManagement()">Device Management</button></h2>
+            <script>
+                function navigateToDeviceManagement() {
+                    // Redirect to the devicemanagement.html page
+                    window.location.href = "devicemanagement.html";
+                }
+            </script>
         </div>
         <div id="frame5">
-            <h2 id="medicinereminders">Medicine Reminders</h2>
+            <h2 id="medicinereminders"><button onclick="navigateToMedicineReminders()">Medicine Reminders</button></h2>
+            <script>
+                function navigateToMedicineReminders() {
+                    // Redirect to the devicemanagement.html page
+                    window.location.href = "medicinereminder.html";
+                }
+            </script>
         </div>
         <div id="frame7">
-            <h2 id="datamanagement">Data Management</h2>
+            <h2 id="datamanagement"><button onclick="navigateToDataManagement()">Data Management</button></h2>
+            <script>
+                function navigateToDataManagement() {
+                    window.location.href = "datamanagement.html";
+                }
+            </script>
         </div>
     </div>
-    <div id="bigdevicebox">
-        <div id="devicebox">
-            <div id="image">
-                <img id="glucometer1" src="images/Glucometer.png">
-            </div>
-            <h2 id="devicename">
-                Device Name<br>Device description
-            </h2> 
+    <div id="devicebox">
+        <div id="image">
+            <img id="glucometer1" src="Glucometer.png">
         </div>
+        <h2 id="devicename">
+            Device Name
+        </h2>
+    </div>
         <div id="addbutton">
             <div id="vector"></div>
             <h2 id="adddevice">Add a device.</h2>
